@@ -13,8 +13,12 @@ class CreateNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('TrNotifications', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('description');
+            $table->unsignedBigInteger('userId');
+            $table->foreign('userId')->references('id')->on('MsUsers');
             $table->timestamps();
         });
     }
