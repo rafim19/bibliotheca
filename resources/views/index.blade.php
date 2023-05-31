@@ -15,23 +15,28 @@
 @endsection
 
 @section('main')
-    <div class="my-5 container">
-        <h1>Welcome to Bibliotheca</h1>
-        <h4 class="ml-4">Fulfill your curiosity with Bibliotheca!</h4>
-        <form method="POST">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Your Binusian Email">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="inputPassword" placeholder="Your Password">
-            </div>
-            <button type="submit" class="btn btn-primary">Sign In</button>
-        </form>
-    </div>
-    <div>
-        <img src="" alt="">
+    <div class="d-flex justify-content-around container">
+        <div class="my-5">
+            <h1>Welcome to Bibliotheca</h1>
+            <h4 class="ml-4">Fulfill your curiosity with Bibliotheca!</h4>
+            {{-- TODO: isi actionnya --}}
+            <form action="" method="POST" class="mt-5">
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Your Binusian Email" style="border-radius: 10px;">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Your Password" style="border-radius: 10px;">
+                </div>
+                <div class="d-flex justify-content-center mt-5">
+                    <button type="submit" class="btn px-5" style="background-color: #f8b133; color: white; border-radius: 40px">Sign In</button>
+                </div>
+            </form>
+        </div>
+        <div class="d-flex align-items-center">
+            <img src="{{ asset('assets/hero.png') }}" alt="books">
+        </div>
     </div>
 @endsection
 
