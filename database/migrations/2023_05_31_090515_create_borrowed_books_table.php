@@ -13,15 +13,20 @@ class CreateBorrowedBooksTable extends Migration
      */
     public function up()
     {
-        Schema::create('TrBorrowedBooks', function (Blueprint $table) {
+        Schema::create('borrowed_books', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('dueDate');
-            $table->boolean('isReturned');
-            $table->unsignedBigInteger('bookId');
-            $table->unsignedBigInteger('userId');
-            $table->foreign('bookId')->references('id')->on('MsBooks');
-            $table->foreign('userId')->references('id')->on('MsUsers');
+
+            $table->unsignedBigInteger('book_id');
+            $table->char('user_id', 10);
+            $table->foreign('book_id')->references('id')->on('books');
+            $table->foreign('user_id')->references('nim')->on('users');
+
+            $table->dateTime('borrowed_date');
+            $table->dateTime('due_date');
+            $table->dateTime('returned_date')->nullable();
+            
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

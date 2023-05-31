@@ -13,17 +13,19 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('MsUsers', function (Blueprint $table) {
-            $table->id();
+        Schema::create('users', function (Blueprint $table) {
             $table->char('nim', 10);
+            $table->primary('nim');
+
             $table->string('name');
             $table->string('email')->unique();
             $table->string('gender');
             $table->string('domicile');
-            $table->string('phoneNumber')->unique();
+            $table->string('phone_number')->unique();
             $table->string('faculty');
             $table->string('major');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

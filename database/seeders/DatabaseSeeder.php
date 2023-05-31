@@ -13,6 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $user = new UserSeeder();
+        $bookCategories = new BookCategorySeeder();
+        $books = new BookSeeder();
+        $borrowedBooks = new BorrowedBookSeeder();
+        // $notifications = new NotificationSeeder();
+
+        $user->run();
+        $bookCategories->run();
+        $books->run();
+        $borrowedBooks->run();
+        // $notifications->run();
     }
 }

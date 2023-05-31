@@ -13,7 +13,7 @@ class CreateBookCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('MsBookCategories', function (Blueprint $table) {
+        Schema::create('book_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();

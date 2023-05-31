@@ -13,20 +13,24 @@ class CreateBooksTable extends Migration
      */
     public function up()
     {
-        Schema::create('MsBooks', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('author');
-            $table->string('description');
-            $table->unsignedBigInteger('categoryId');
-            $table->foreign('categoryId')->references('id')->on('MsBookCategories');
-            $table->string('quantity');
+            $table->text('description');
+
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('book_categories');
+
+            $table->integer('quantity')->default(0);
             $table->string('isbn');
             $table->string('publisher');
-            $table->dateTime('releaseDate');
-            $table->string('edition');
+            $table->year('release_year');
+            $table->integer('edition')->default(1);
             $table->string('language');
+            $table->integer('borrowed_count')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
