@@ -34,3 +34,7 @@
         <img src="" alt="">
     </div>
 @endsection
+
+{{-- @section('more-components')
+    @include('components.footer')
+@endsection --}}

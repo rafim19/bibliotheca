@@ -31,6 +31,12 @@
 <body>
   <header>@yield('header')</header>
   <main>@yield('main')</main>
+  <footer class="pt-3" style="color: white; background-color: #015581">
+    <div class="ml-5">
+      <p>Library Knowledge and Service Center</p>
+      <p>Bibliotheca Inc.</p>
+    </div>
+  </footer>
   @yield('more-components')
   @yield('more-js')
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

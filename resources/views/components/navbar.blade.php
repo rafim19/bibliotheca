@@ -1,7 +1,8 @@
 @section('more-css')
   <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 @endsection
-<nav class="d-flex align-items-center p-2">
+
+<nav class="d-flex align-items-center py-2">
 {{-- Check apakah sudah login atau belum --}}
 {{-- @if () --}}
     
