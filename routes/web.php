@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('index');
+    return redirect()->route('login');
 });
+
+Route::get('/login', function() {
+    return view('index');
+})->name('login');
+
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home/{categoryId}', [HomeController::class, 'showByCategory'])->name('showByCategory');

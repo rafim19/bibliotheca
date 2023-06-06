@@ -18,4 +18,8 @@ class Book extends Model
     public function borrowedBooks() {
         return $this->hasMany(BorrowedBook::class, 'id', 'book_id');
     }
+
+    public function bookCategory() {
+        return $this->hasOne(BookCategory::class, 'category_id', 'id');
+    }
 }
