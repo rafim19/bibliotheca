@@ -22,8 +22,10 @@ Route::get('/', function () {
 
 Route::get('/login', function() {
     return view('index');
-})->name('login');
+})->name('login')->middleware('isLoggedOut');
+
+// Route::post('/login', [LoginController]);
 
 Route::post('/login', [LoginController::class, 'authenticate']);
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/home/{categoryId}', [HomeController::class, 'showByCategory'])->name('showByCategory');
+Route::get('/home/{categoryId?}', [HomeController::class, 'showByCategory'])->name('showByCategory')->middleware('isLoggedIn');
+Route::post('/logout', [LoginController::class, 'logout']);

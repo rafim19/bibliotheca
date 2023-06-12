@@ -6,6 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class UserSeeder extends Seeder
                     'nim' => '2443193872',
                     'name' => 'Henry Cavill',
                     'email' => 'henrycavill@binus.ac.id',
+                    'password' => Hash::make('12345678'),
                     'gender' => 'Male',
                     'domicile' => 'Jakarta',
                     'phone_number' => '081292122421',
@@ -34,6 +36,7 @@ class UserSeeder extends Seeder
                     'nim' => '2443193081',
                     'name' => 'Corey Mylchreest',
                     'email' => 'corey@binus.ac.id',
+                    'password' => Hash::make('qwerty123'),
                     'gender' => 'Male',
                     'domicile' => 'Jakarta',
                     'phone_number' => '085792122421',

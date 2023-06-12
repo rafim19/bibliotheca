@@ -35,14 +35,12 @@ class HomeController extends Controller
         return $books;
     }
 
-    public function index() {
-        $books = Book::orderBy('borrowed_count', 'desc')->limit(5)->get();
-        $books = $this->processBooks($books);
-        return view('home', ['books' => $books]);
-    }
-
-    public function showByCategory($categoryId) {
-        $books = Book::where('category_id', $categoryId)->get();
+    public function showByCategory($categoryId = null) {
+        if ($categoryId == null) {
+            $books = Book::orderBy('borrowed_count', 'desc')->limit(5)->get();
+        } else {
+            $books = Book::where('category_id', $categoryId)->get();
+        }
         $books = $this->processBooks($books);
         return view('home', ['books' => $books, 'categoryId' => $categoryId]);
     }

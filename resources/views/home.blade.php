@@ -22,7 +22,7 @@
 @section('main')
     <div style="background-color: #068edb; color: white">
         <div class="d-flex justify-content-around py-5 mx-5">
-            <a href="{{ route('home') }}" style="text-decoration: none; color: white;">
+            <a href="{{ route('showByCategory') }}" style="text-decoration: none; color: white;">
                 <div 
                     class="d-flex justify-content-center align-items-center rounded categories 
                         @if (@$categoryId == null)
@@ -88,14 +88,49 @@
                 <div class="d-flex flex-column px-3 pt-2 pb-3" style="height: 100%">
                     <h6 class="">{{ $book->title }}</h6>
                     <div class="d-flex text-right align-self-end" style="height: 100%">
-                        <button class="btn align-self-end" style="background-color: #F8B133; color: white; border-radius: 10px">Details</button>
+                        <button class="btn align-self-end" data-toggle="modal" data-target="{{ '#detail-book-'.$book->id }}" style="background-color: #F8B133; color: white; border-radius: 10px">
+                            Details
+                        </button>
                     </div>
+                </div>
+            </div>
+            <div class="modal fade" id="{{ 'detail-book-'.$book->id }}" tabindex="-1" role="dialog" aria-labelledby="{{ 'detail-book-title-'.$book->id }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header" style="background-color: #0097DA; color: white;">
+                      <h5 class="modal-title" id="{{ 'detail-book-title-'.$book->id }}">{{ $book->title }}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="d-flex modal-body">
+                      <div style="flex: 1">
+                        <div>
+                            <img src="{{ asset('assets/books/'.$book->id.'.jpg') }}" alt="{{ $book->title }}" style="width: 100%; border-radius: 15px; object-fit: fill">
+                        </div>
+                      </div>
+                      <div style="flex: 1">
+                        <div>
+                            <h4>{{ $book->title }}</h4>
+                            <p>{{ $book->author }}</p>
+                        </div>
+                        <hr>
+                        <p>{{ $book->description }}</p>
+                      </div>
+                    </div>
+                    {{-- <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div> --}}
+                  </div>
                 </div>
             </div>
         @endforeach
     </div>
+    <!-- Button trigger modal -->
+{{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detail-book">
+    Launch demo modal
+  </button>
+   --}}
+  <!-- Modal -->
 @endsection
-
-{{-- @section('more-components')
-    @include('components.footer')
-@endsection --}}
