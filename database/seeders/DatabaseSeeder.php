@@ -17,12 +17,12 @@ class DatabaseSeeder extends Seeder
         $bookCategories = new BookCategorySeeder();
         $books = new BookSeeder();
         $borrowedBooks = new BorrowedBookSeeder();
-        // $notifications = new NotificationSeeder();
+        $notifications = new NotificationSeeder();
 
         $user->run();
         $bookCategories->run();
         $books->run();
         $borrowedBooks->run();
-        // $notifications->run();
+        $notifications->run();
     }
 }
