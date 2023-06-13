@@ -17,12 +17,14 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
+        // dd($credentials['password']);
         $user = User::where('email', $credentials['email'])->first();
-        $isEmailRight = (
-            (strcasecmp($credentials['email'], $user->email) == 0)
-                ? true 
-                : false
-        );
+
+        if ($user == null) {
+            return back()->withErrors(['loginFailed' => 'Email or password is incorrect!']);
+        }
+
+        $isEmailRight = $user != null;
         $isPasswordRight = Hash::check($credentials['password'], $user->password);
         
         if ($isEmailRight && $isPasswordRight) {
@@ -39,5 +41,12 @@ class LoginController extends Controller
             $request->session()->pull('loginId');
             return redirect()->intended('login');
         }
+    }
+
+    public function authCheck(Request $request) {
+        if ($request->session()->has('loginId')) {
+            return redirect()->intended('showByCategory');
+        }
+        return redirect()->intended('login');
     }
 }

@@ -31,18 +31,19 @@ class HomeController extends Controller
 
             $newTitle = $isAllWord == false ? $newTitle."..." : $newTitle;
             $book->title = $newTitle;
+            $book->description = nl2br($book->description);
         }
         return $books;
     }
 
-    public function showByCategory($categoryId = null) {
+    public function showByCategory(Request $request, $categoryId = null) {
         if ($categoryId == null) {
             $books = Book::orderBy('borrowed_count', 'desc')->limit(5)->get();
         } else {
             $books = Book::where('category_id', $categoryId)->get();
         }
         $books = $this->processBooks($books);
-        return view('home', ['books' => $books, 'categoryId' => $categoryId]);
+        return view('home', ['books' => $books, 'categoryId' => $categoryId, 'request' => $request]);
     }
 
 

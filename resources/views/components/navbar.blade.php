@@ -16,7 +16,7 @@
       </form>
     </div>
     <div class="d-flex justify-content-end align-items-center ml-auto mr-5" style="flex: 1">
-      <a class="mr-4" href="#">
+      <a class="mr-4" href="{{ route('notifications') }}">
         <span class="material-symbols-outlined" style="font-size: 30px;">
           notifications
         </span>

@@ -41,6 +41,10 @@
                         <small style="color: #D73930">
                             {{ $message }}
                         </small>
+                    @elseif (session()->has('errors'))
+                        <small style="color: #D73930">
+                            {{ @session('errors')->first('loginFailed') }}
+                        </small>
                     @enderror
                 </div>
                 <div class="form-group">
