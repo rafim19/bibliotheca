@@ -45,7 +45,7 @@ class LoginController extends Controller
 
     public function authCheck(Request $request) {
         if ($request->session()->has('loginId')) {
-            return redirect()->intended('showByCategory');
+            return redirect()->intended('home');
         }
         return redirect()->intended('login');
     }

@@ -46,5 +46,14 @@ class HomeController extends Controller
         return view('home', ['books' => $books, 'categoryId' => $categoryId, 'request' => $request]);
     }
 
+    public function search(Request $request) {
+        $books = Book::whereRaw("title LIKE '%".$request['searchBooks']."%' OR author LIKE '%".$request['searchBooks']."%' OR publisher LIKE '%".$request['searchBooks']."%'")->get();
+        $isEmpty = count($books) == 0;
 
+        if (!$isEmpty) {
+            $books = $this->processBooks($books);
+        }
+
+        return view('search', ['books' => $books, 'isEmpty' => $isEmpty]);
+    }
 }

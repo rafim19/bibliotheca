@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BorrowedBook;
-use App\Models\User;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\BorrowedBook;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller
 {
@@ -21,11 +22,11 @@ class UserController extends Controller
         $inProgressBooks = BorrowedBook::with('book')->where([
             ['user_id', $user->nim],
             ['due_date', '>', Carbon::now()->toDateString()]
-        ])->paginate(5);
+        ])->paginate(3);
         $finishedBooks = BorrowedBook::with('book')->where([
             ['user_id', $user->nim],
             ['due_date', '<=', Carbon::now()->toDateString()]
-        ])->paginate(5);
+        ])->paginate(3);
 
         // foreach ($inProgressBooks as $inProgress) {
         //     $inProgress->borrowedDate = 
@@ -34,7 +35,8 @@ class UserController extends Controller
         return view('profile', [
             'user' => $user,
             'inProgressBooks' => $inProgressBooks,
-            'finishedBooks' => $finishedBooks
+            'finishedBooks' => $finishedBooks,
+            'routeName' => Route::currentRouteName()
         ]);
     }
 }

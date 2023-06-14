@@ -107,6 +107,7 @@
                     <p class="mb-2 font-weight-bold" style="align-self:center">:</p>
                     <p class="mb-2" style="align-self:center">{{ date('d M Y', strtotime($inProgress->due_date)) }}</p>
                   </div>
+                  <a class="btn mt-3" href="{{ asset('assets/books/'.$inProgress->book->id.'.pdf') }}" target="_blank" style="background-color: #F8B133; color: white; border-radius: 10px">Read Book</a>
                 </div>
               </div>
             @endforeach

@@ -32,6 +32,7 @@ Route::middleware(['isLoggedOut'])->group(function() {
 
 Route::middleware(['isLoggedIn'])->group(function() {
     Route::get('/home/{categoryId?}', [HomeController::class, 'showByCategory'])->name('showByCategory');
+    Route::post('/search', [HomeController::class, 'search'])->name('search');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::get('/read-notif/{id}', [NotificationController::class, 'readMiddle']);
     Route::get('/profile', [UserController::class, 'index'])->name('profile');

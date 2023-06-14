@@ -6,6 +6,7 @@ use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Route;
 
 class NotificationController extends Controller
 {
@@ -15,7 +16,7 @@ class NotificationController extends Controller
                         ->get();
         $isEmpty = count($notifications) == 0;
 
-        return view('notifications', ['notifications' => $notifications, 'isEmpty' => $isEmpty]);
+        return view('notifications', ['notifications' => $notifications, 'isEmpty' => $isEmpty, 'routeName' => Route::currentRouteName()]);
     }
 
     public function readMiddle(Request $request, $id) {

@@ -91,9 +91,9 @@
             </a>
         </div>
     </div>
-    <div class="d-flex justify-content-between flex-wrap m-5">
+    <div class="d-flex flex-wrap m-5">
         @foreach ($books as $book)
-            <div class="d-flex flex-column align-items border mb-4" style="width: 180px; height: 380px; border-radius: 20px; background-color: #D9D9D9; cursor: pointer">
+            <div class="d-flex flex-column border mx-4 mb-4" style="width: 180px; height: 380px; border-radius: 20px; background-color: #D9D9D9; cursor: pointer">
                 <div>
                     <img src="{{ asset('assets/books/'.$book->id.'.jpg') }}" alt="{{ $book->title }}" style="width: 100%; height: 250px; border-radius: 15px; object-fit: fill">
                 </div>
@@ -135,6 +135,7 @@
                                 {{-- <form action="/borrow" method="POST"> --}}
                                     {{-- <input type="hidden" name="bookId" value="{{ $book->id }}"> --}}
                                 <button id="{{ 'borrow-btn-'.$book->id }}" class="btn btn-block" style="background-color: #F8B133; color: white; border-radius: 10px;">Borrow</button>
+                                <div class="text-center"><small class=""><b>Length of borrowing: 7 Days</b></small></div>
                                 {{-- </form> --}}
                             </div>
                             <div class="col-7">
@@ -170,6 +171,7 @@
                 let body = await response.json();
 
                 alert(body.title)
+	            window.location.href = 'http://127.0.0.1:8000/profile';
                 // if (body?.code == 200) {
                 //     alert('Berhasil');
                 // } else {

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\BorrowedBook;
+use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +31,7 @@ class BookController extends Controller
         // dd('test');
         $startDate = Carbon::now();
         $endDate = $startDate->addDays(7);
+        $book = Book::where('id', $bookId)->first();
         
         DB::beginTransaction();
         try {
@@ -39,6 +42,12 @@ class BookController extends Controller
                 'due_date' => $endDate->toDateTimeString(),
                 'returned_date' => null,
                 'created_at' => Carbon::now()->toDateTimeString()
+            ]);
+            Notification::insert([
+                'title' => 'NEW BOOK BORROWED!',
+                'description' => 'You have borrowed a book named '.'"'.$book->title.'"!'.' Please return it before the due date!',
+                'is_read' => false,
+                'user_id' => $userId,   
             ]);
             // dd([
             //     'code' => 200,
