@@ -17,7 +17,7 @@ class User extends Model
     protected $fillable = ['nim', 'name', 'email', 'gender', 'domicile', 'phone_number', 'faculty', 'major'];
 
     public function borrowedBooks() {
-        return $this->hasMany(BorrowedBook::class, 'nim', 'user_id');
+        return $this->hasMany(BorrowedBook::class, 'user_id', 'nim');
     }
 
     public function notifications() {

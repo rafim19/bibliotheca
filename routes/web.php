@@ -4,6 +4,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthCheck;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +33,9 @@ Route::middleware(['isLoggedOut'])->group(function() {
 Route::middleware(['isLoggedIn'])->group(function() {
     Route::get('/home/{categoryId?}', [HomeController::class, 'showByCategory'])->name('showByCategory');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+    Route::get('/read-notif/{id}', [NotificationController::class, 'readMiddle']);
+    Route::get('/profile', [UserController::class, 'index'])->name('profile');
+    Route::get('/borrow/{id}', [BookController::class, 'borrowMiddle']);
     Route::post('/logout', [LoginController::class, 'logout']);
-    Route::post('/borrow', [BookController::class, 'borrow']);
 });
 

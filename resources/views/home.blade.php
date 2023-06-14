@@ -132,9 +132,10 @@
                         {{-- <hr> --}}
                         <div class="modal-footer">
                             <div class="col mb-auto">
-                                <form action="/borrow" method="POST">
-                                    <button class="btn btn-block" style="background-color: #F8B133; color: white; border-radius: 10px;">Borrow</button>
-                                </form>
+                                {{-- <form action="/borrow" method="POST"> --}}
+                                    {{-- <input type="hidden" name="bookId" value="{{ $book->id }}"> --}}
+                                <button id="{{ 'borrow-btn-'.$book->id }}" class="btn btn-block" style="background-color: #F8B133; color: white; border-radius: 10px;">Borrow</button>
+                                {{-- </form> --}}
                             </div>
                             <div class="col-7">
                                 <h5>Detail</h5>
@@ -155,18 +156,26 @@
                 </div>
             </div>
         @endforeach
-        {{-- <div class="d-flex flex-column align-items border mb-4" style="width: 180px; height: 380px; border-radius: 20px; background-color: #D9D9D9; cursor: pointer">
-            <div>
-                <img src="{{ asset('assets/books/'.'1.jpg') }}" alt="test" style="width: 100%; height: 250px; border-radius: 15px; object-fit: fill">
-            </div>
-            <div class="d-flex flex-column px-3 pt-2 pb-3" style="height: 100%">
-                <h6 class="">test</h6>
-                <div class="d-flex text-right align-self-end" style="height: 100%">
-                    <button class="btn align-self-end" data-toggle="modal" data-target="{{ '#detail-book-1' }}" style="background-color: #F8B133; color: white; border-radius: 10px">
-                        Details
-                    </button>
-                </div>
-            </div>
-        </div> --}}
     </div>
+@endsection
+
+@section('more-js')
+    <script>
+        let books = {!! json_encode($books, JSON_HEX_TAG) !!};
+
+        books.forEach((book, idx) => {
+            window['borrowBtn' + book.id] = document.getElementById('borrow-btn-' + book.id);
+            window['borrowBtn' + book.id].addEventListener('click', async function(e) {
+                let response = await fetch('/borrow/' + book.id);
+                let body = await response.json();
+
+                alert(body.title)
+                // if (body?.code == 200) {
+                //     alert('Berhasil');
+                // } else {
+                //     alert(body.title)
+                // }
+            })
+        });
+    </script>
 @endsection

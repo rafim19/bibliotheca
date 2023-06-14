@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Http;
 
 class NotificationController extends Controller
 {
@@ -16,7 +18,7 @@ class NotificationController extends Controller
         return view('notifications', ['notifications' => $notifications, 'isEmpty' => $isEmpty]);
     }
 
-    public function read(Request $request, $id) {
+    public function readMiddle(Request $request, $id) {
         $notification = Notification::where('id', $id)->first();
         $isEmpty = $notification == null;
 
@@ -32,8 +34,12 @@ class NotificationController extends Controller
             return null;
         }
 
-        $markAsRead = $notification->update(['is_read' => 1]);
+        Http::get(URL::to('/api/read-notif/'.$id));
+    }
 
+    public function read(Request $request, $id) {
+        $markAsRead = Notification::where('id', $id)->update(['is_read' => 1]);
+        
         if ($markAsRead == 0 || $markAsRead == null) {
             return [
                 'code' => 500,
@@ -41,9 +47,9 @@ class NotificationController extends Controller
             ];
         }
 
-        return [
+        return response()->json([
             'code' => 200,
             'title' => 'Mark as read successful',
-        ];;
+        ]);
     }
 }

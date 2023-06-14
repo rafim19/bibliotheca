@@ -6,8 +6,10 @@
 
 <nav class="d-flex align-items-center py-2">
   <div class="ml-5 mr-2" style="flex: 1">
-    <img class="binus-logo mr-2" src="{{ asset('assets/logo/logo-binus.png') }}" alt="logo binus" width="100">
-    <img class="bibliotheca-logo" src="{{ asset('assets/logo/bibliotheca-logo-cropped.png') }}" alt="logo bibliotheca" width="70">
+    <a href="{{ route('showByCategory') }}" style="text-decoration: none;">
+      <img class="binus-logo mr-2" src="{{ asset('assets/logo/logo-binus.png') }}" alt="logo binus" width="100">
+      <img class="bibliotheca-logo" src="{{ asset('assets/logo/bibliotheca-logo-cropped.png') }}" alt="logo bibliotheca" width="70">
+    </a>
   </div>
   @if (Session::has('loginId'))
     <div class="ml-auto mr-2" style="flex: 2">
@@ -22,19 +24,19 @@
         </span>
       </a>
       <div class="nav-item dropdown">
-        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link" id="navbarDropdown" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="material-symbols-outlined" style="font-size: 30px;">
             account_circle
           </span>
         </a>
-        <form action="/logout" method="POST">
-          @csrf
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Profile</a>
-            <div class="dropdown-divider"></div>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
+          <div class="dropdown-divider"></div>
+          <form action="/logout" method="POST">
+            @csrf
             <button type="submit" class="dropdown-item text-danger">Logout</button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   @endif

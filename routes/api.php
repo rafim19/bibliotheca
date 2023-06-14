@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\BookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Route::middleware(['api'])->group(function() {
+// });
+Route::get('/borrow/{bookId}/{userId}', [BookController::class, 'borrow']);
 Route::get('/read-notif/{id}', [NotificationController::class, 'read']);
 // Route::middleware('isLoggedIn')->group(function() {
 // });

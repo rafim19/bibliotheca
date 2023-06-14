@@ -16,10 +16,10 @@ class BorrowedBook extends Model
     protected $fillable = ['book_id', 'user_id', 'due_date', 'is_returned'];
 
     public function book() {
-        return $this->hasOne(Book::class, 'book_id', 'id');
+        return $this->hasOne(Book::class, 'id', 'book_id');
     }
 
     public function user() {
-        return $this->hasOne(User::class, 'user_id', 'nim');
+        return $this->hasOne(User::class, 'nim', 'user_id');
     }
 }
